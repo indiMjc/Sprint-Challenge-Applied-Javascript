@@ -13,11 +13,11 @@ const tabsParent = document.querySelector(".topics");
 axios
   .get("https://lambda-times-backend.herokuapp.com/topics")
   .then(response => {
-    console.log(response);
     response.data.topics.forEach(ele => {
       let newTab = document.createElement("div");
       tabsParent.appendChild(newTab);
       newTab.classList.add("tab");
+      newTab.classList.add(ele);
       newTab.textContent = ele;
     });
   })
