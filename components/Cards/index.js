@@ -20,20 +20,48 @@
 
 const cardContainer = document.querySelector(".cards-container");
 
+// axios
+//   .get("https://lambda-times-backend.herokuapp.com/articles")
+//   .then(response => {
+//     let article = response.data.articles;
+//     console.log(article);
+//     cardContainer.appendChild(CardMaker(article.bootstrap));
+//     cardContainer.appendChild(CardMaker(article.javascript));
+//     cardContainer.appendChild(CardMaker(article.jquery));
+//     cardContainer.appendChild(CardMaker(article.node));
+//     cardContainer.appendChild(CardMaker(article.technology));
+//   })
+//   .catch(error => {
+//     console.log("The data was not returned", error);
+//   });
+
 axios
   .get("https://lambda-times-backend.herokuapp.com/articles")
   .then(response => {
-    let article = response.data.articles;
-    console.log(article);
-    cardContainer.appendChild(CardMaker(article.bootstrap));
-    cardContainer.appendChild(CardMaker(article.javascript));
-    cardContainer.appendChild(CardMaker(article.jquery));
-    cardContainer.appendChild(CardMaker(article.node));
-    cardContainer.appendChild(CardMaker(article.technology));
-  })
-  .catch(error => {
-    console.log("The data was not returned", error);
+    console.log(response.data);
+    let articleData = response.data.articles;
+    console.log(articleData);
+    console.log(articleData.bootstrap);
+    articleData.javascript.forEach(current => {
+      cardContainer.appendChild(CardMaker(current));
+    });
+    articleData.bootstrap.forEach(current => {
+      cardContainer.appendChild(CardMaker(current));
+    });
+    articleData.technology.forEach(current => {
+      cardContainer.appendChild(CardMaker(current));
+    });
+    articleData.jquery.forEach(current => {
+      cardContainer.appendChild(CardMaker(current));
+    });
+    articleData.node.forEach(current => {
+      cardContainer.appendChild(CardMaker(current));
+    });
+    // articleData.article.javascript.forEach(async current => {
+    //   const individual = await axios.get(current);
+    //   cardContainer.appendChild(CardMaker(individual));
   });
+//   });
 
 function CardMaker(subject) {
   //create
